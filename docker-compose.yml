@@ -1,6 +1,7 @@
 version: "3"
 services:
   nginx:
+    restart: always
     build: ./dockers/nginx
     ports:
       - 80:80
@@ -13,6 +14,7 @@ services:
       - react
       - gitlab
   rails:
+    restart: always
     build:
       context: ../react-blog
       dockerfile: ./dockers/rails/Dockerfile
@@ -23,6 +25,7 @@ services:
     expose:
       - 3000
   react:
+    restart: always
     build:
       context: ../react-blog
       dockerfile: ./dockers/react/Dockerfile
@@ -31,10 +34,15 @@ services:
       - 8080
   gitlab:
     image: gitlab/gitlab-ee:latest
+    restart: always
+    hostname: 'gitlab.resivalex.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.resivalex.com'
     expose:
-      - 80
-      - 22
-      - 443
+      - '80:80'
+      - '22:22'
+      - '443:443'
     volumes:
       - ./gitlab/config:/etc/gitlab
       - ./gitlab/logs:/var/log/gitlab
