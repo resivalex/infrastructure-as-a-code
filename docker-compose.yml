@@ -3,13 +3,15 @@ services:
   nginx:
     build: ./dockers/nginx
     ports:
-    - 80:80
+      - 80:80
     depends_on:
-    - rails
-    - react
+      - rails
+      - react
     links:
-    - rails
-    - react
+      - rails
+      - react
+    volumes:
+      - ./log:/var/log/nginx
   rails:
     build:
       context: ../react-blog
