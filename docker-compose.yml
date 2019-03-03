@@ -7,11 +7,11 @@ services:
     depends_on:
       - rails
       - react
+      - gitlab
     links:
       - rails
       - react
-    volumes:
-      - ./dockers/nginx/log:/var/log/nginx
+      - gitlab
   rails:
     build:
       context: ../react-blog
@@ -29,3 +29,13 @@ services:
     command: node server.js
     expose:
       - 8080
+  gitlab:
+    image: gitlab/gitlab-ee:latest
+    expose:
+      - 80
+      - 22
+      - 443
+    volumes:
+      - ./gitlab/config:/etc/gitlab
+      - ./gitlab/logs:/var/log/gitlab
+      - ./gitlab/data:/var/opt/gitlab
