@@ -40,7 +40,7 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://gitlab.resivalex.com'
-    ports:
+    expose:
       - '80:80'
       - '22:22'
       - '443:443'
