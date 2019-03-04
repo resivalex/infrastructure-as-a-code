@@ -41,9 +41,9 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://gitlab.resivalex.com'
     expose:
-      - '80:80'
-      - '22:22'
-      - '443:443'
+      - 80
+      - 22
+      - 443
     volumes:
       - ./gitlab/config:/etc/gitlab
       - ./gitlab/logs:/var/log/gitlab
