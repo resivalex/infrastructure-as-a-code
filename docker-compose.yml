@@ -35,7 +35,8 @@ services:
   gitlab:
     image: gitlab/gitlab-ee:latest
     restart: always
-    hostname: 'gitlab.resivalex.com'
+    hostname: resivalex
+    domainname: gitlab.resivalex.com
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://gitlab.resivalex.com'
