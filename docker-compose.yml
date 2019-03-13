@@ -8,11 +8,12 @@ services:
     depends_on:
       - rails
       - react
-      - gitlab
     links:
       - rails
       - react
-      - gitlab
+    volumes:
+      - /etc/infrastruture/certbot/conf:/etc/letsencrypt
+      - /etc/infrastruture/certbot/www:/var/www/certbot
   rails:
     restart: always
     build:
@@ -32,30 +33,9 @@ services:
     command: node server.js
     expose:
       - 8080
-  gitlab:
-    image: gitlab/gitlab-ee:latest
-    restart: always
-    hostname: resivalex
-    domainname: gitlab.resivalex.com
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://gitlab.resivalex.com'
-    expose:
-      - 80
-      - 22
-      - 443
-    volumes:
-      - ./gitlab/config:/etc/gitlab
-      - ./gitlab/logs:/var/log/gitlab
-      - ./gitlab/data:/var/opt/gitlab
-  gitlab-runner:
-    image: gitlab/gitlab-runner:latest
+  certbot:
+    image: certbot/certbot
     restart: always
     volumes:
-      - ./gitlab-runner/config:/etc/gitlab-runner
-      - /var/run/docker.sock:/var/run/docker.sock
-  gitlab-registry:
-    image: registry:2
-    restart: always
-    ports:
-      - '5000:5000'
+      - /etc/infrastruture/certbot/conf:/etc/letsencrypt
+      - /etc/infrastruture/certbot/www:/var/www/certbot
