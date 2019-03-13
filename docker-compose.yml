@@ -12,8 +12,8 @@ services:
       - rails
       - react
     volumes:
-      - /etc/infrastruture/certbot/conf:/etc/letsencrypt
-      - /etc/infrastruture/certbot/www:/var/www/certbot
+      - /etc/infrastructure/certbot/conf:/etc/letsencrypt
+      - /etc/infrastructure/certbot/www:/var/www/certbot
   rails:
     restart: always
     build:
@@ -37,5 +37,5 @@ services:
     image: certbot/certbot
     restart: always
     volumes:
-      - /etc/infrastruture/certbot/conf:/etc/letsencrypt
-      - /etc/infrastruture/certbot/www:/var/www/certbot
+      - /etc/infrastructure/certbot/conf:/etc/letsencrypt
+      - /etc/infrastructure/certbot/www:/var/www/certbot
