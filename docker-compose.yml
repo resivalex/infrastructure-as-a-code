@@ -15,6 +15,7 @@ services:
     volumes:
       - /etc/infrastructure/certbot/conf:/etc/letsencrypt
       - /etc/infrastructure/certbot/www:/var/www/certbot
+      - /etc/infrastructure/certificates:/var/www/certificates
   rails:
     restart: always
     build:
