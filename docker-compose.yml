@@ -34,9 +34,8 @@ services:
     command: node server.js
     expose:
       - 8080
-  certbot:
-    image: certbot/certbot
-    restart: always
+  acme:
+    image: neilpang/acme.sh
+    command: daemon
     volumes:
-      - /etc/infrastructure/certbot/conf:/etc/letsencrypt
-      - /etc/infrastructure/certbot/www:/var/www/certbot
+      - /etc/infrastructure/certificates:/acme.sh
