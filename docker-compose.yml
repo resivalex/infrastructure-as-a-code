@@ -77,6 +77,7 @@ services:
       WORDPRESS_CONFIG_EXTRA: |
         define('WP_HOME', 'https://resivalex.com/');
         define('WP_SITEURL', 'https://resivalex.com/');
+        define('FS_METHOD', 'direct');
     depends_on:
       - mysql
     volumes:
