@@ -67,8 +67,8 @@ services:
   wordpress:
     image: wordpress:latest
     restart: always
-    ports:
-      - 8989:80
+    expose:
+      - 80
     environment:
       WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
