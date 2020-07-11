@@ -10,12 +10,9 @@ services:
       - rails
       - react
       - wordpress
-    links:
-      - rails
-      - react
-      - wordpress
     volumes:
       - /etc/infrastructure/certificates:/var/www/certificates
+    network_mode: host
   rails:
     restart: always
     build:
@@ -67,8 +64,6 @@ services:
   wordpress:
     image: wordpress:latest
     restart: always
-    expose:
-      - 80
     ports:
       - 8181:80
     environment:
