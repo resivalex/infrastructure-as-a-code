@@ -6,31 +6,9 @@ services:
     ports:
       - 80:80
       - 443:443
-    depends_on:
-      - rails
-      - react
     volumes:
       - /etc/infrastructure/certificates:/var/www/certificates
     network_mode: host
-  rails:
-    restart: always
-    build:
-      context: ../react-blog
-      dockerfile: ./dockers/rails/Dockerfile
-    environment:
-      - RAILS_ENV=production
-      - SECRET_KEY_BASE=rio32pqir23r2h3ur23prh2u13r213r
-    command: rails s
-    ports:
-      - 3000:3000
-  react:
-    restart: always
-    build:
-      context: ../react-blog
-      dockerfile: ./dockers/react/Dockerfile
-    command: node server.js
-    ports:
-      - 8080:8080
   acme:
     image: neilpang/acme.sh
     command: daemon
