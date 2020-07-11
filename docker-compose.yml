@@ -10,10 +10,6 @@ services:
       - rails
       - react
       - wordpress
-    links:
-      - rails
-      - react
-      - wordpress
     volumes:
       - /etc/infrastructure/certificates:/var/www/certificates
     network_mode: host
