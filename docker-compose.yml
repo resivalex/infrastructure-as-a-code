@@ -6,9 +6,6 @@ services:
     ports:
       - 80:80
       - 443:443
-    depends_on:
-      - rails
-      - react
     volumes:
       - /etc/infrastructure/certificates:/var/www/certificates
     network_mode: host
