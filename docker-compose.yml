@@ -25,16 +25,16 @@ services:
       - RAILS_ENV=production
       - SECRET_KEY_BASE=rio32pqir23r2h3ur23prh2u13r213r
     command: rails s
-    expose:
-      - 3000
+    ports:
+      - 3000:3000
   react:
     restart: always
     build:
       context: ../react-blog
       dockerfile: ./dockers/react/Dockerfile
     command: node server.js
-    expose:
-      - 8080
+    ports:
+      - 8080:8080
   acme:
     image: neilpang/acme.sh
     command: daemon
@@ -67,8 +67,8 @@ services:
   wordpress:
     image: wordpress:latest
     restart: always
-    expose:
-      - 80
+    ports:
+      - 8181:80
     environment:
       WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
