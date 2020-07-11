@@ -9,7 +9,6 @@ services:
     depends_on:
       - rails
       - react
-      - wordpress
     volumes:
       - /etc/infrastructure/certificates:/var/www/certificates
     network_mode: host
@@ -61,31 +60,3 @@ services:
       - /etc/infrastructure/postgres-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-  wordpress:
-    image: wordpress:latest
-    restart: always
-    ports:
-      - 8181:80
-    environment:
-      WORDPRESS_DB_HOST: mysql:3306
-      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
-      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
-      WORDPRESS_CONFIG_EXTRA: |
-        define('WP_HOME', 'https://resivalex.com/');
-        define('WP_SITEURL', 'https://resivalex.com/');
-        define('FS_METHOD', 'direct');
-    depends_on:
-      - mysql
-    volumes:
-      - ${WORDPRESS_CONTENT_PATH}:/var/www/html/wp-content
-  mysql:
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    volumes:
-      - ${MYSQL_DATA_PATH}:/var/lib/mysql
